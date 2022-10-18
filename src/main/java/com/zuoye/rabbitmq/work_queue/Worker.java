@@ -1,10 +1,8 @@
-package com.zuoye.rabbitmq.hello_world;
+package com.zuoye.rabbitmq.work_queue;
 
-import com.rabbitmq.client.*;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import com.rabbitmq.client.CancelCallback;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.DeliverCallback;
 
 import static com.zuoye.rabbitmq.RabbitMQUtils.createChannel;
 
@@ -12,7 +10,7 @@ import static com.zuoye.rabbitmq.RabbitMQUtils.createChannel;
  * @author ZhangXueJun
  * @Date 2022年10月16日
  */
-public class Consumer {
+public class Worker {
 
     public static final String QUEUE_NAME = "zuoye-hello";
 
@@ -22,7 +20,6 @@ public class Consumer {
 
         DeliverCallback deliverCallback = (consumerTag, message) -> {
             System.out.println(new String(message.getBody()));
-//                channel.basicAck(message.getEnvelope().getDeliveryTag(), false);
         };
 
         CancelCallback cancelCallback = (String consumerTag) -> {
@@ -34,6 +31,6 @@ public class Consumer {
          */
         String s = channel.basicConsume(QUEUE_NAME, true, deliverCallback, cancelCallback);
         System.out.println("执行完毕");
-
+      
     }
 }

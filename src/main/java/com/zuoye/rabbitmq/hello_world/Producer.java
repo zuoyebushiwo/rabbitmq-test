@@ -4,8 +4,10 @@ import com.google.common.collect.Maps;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.zuoye.rabbitmq.RabbitMQUtils;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -18,28 +20,26 @@ public class Producer {
 
     private static final String QUEUE_NAME = "zuoye-hello";
 
-    public static void main(String[] args) {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("127.0.0.1");
-        factory.setPort(12345);
-        factory.setUsername("guest");
-        factory.setPassword("guest");
+    public static void main(String[] args) throws Exception {
+        Channel channel = RabbitMQUtils.createChannel();
+        channel.queueDeclare(QUEUE_NAME, true, false, false, Maps.newHashMap());
 
-        try (Connection connection = factory.newConnection()) {
-            Channel channel = connection.createChannel();
-            channel.queueDeclare(QUEUE_NAME, true, false, false, Maps.newHashMap());
-
-            // 发送消息
-            String message = "hello world";
-
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-            System.out.println("发送消息完毕");
+        // 发送消息
+        String message = "hello world";
 
 
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        int i = 0;
+        while (true) {
+            try {
+                String sed = message + i;
+                System.out.println("发送消息成功：" + sed);
+                channel.basicPublish("", QUEUE_NAME, null, sed.getBytes());
+                i++;
+                TimeUnit.SECONDS.sleep(5);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
     }
 }
