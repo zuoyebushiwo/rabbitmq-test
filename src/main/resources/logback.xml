@@ -1,0 +1,21 @@
+<configuration>
+    <property name="LOG_HOME" value="/home"/>
+    <!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+    <!--        <file>src/test/resources/logback.log</file>-->
+    <!--        <append>true</append>-->
+    <!--        <encoder>-->
+    <!--            <pattern>[%date] %-4relative [%thread] [%-5level] [%logger{35} %file:%line] - %msg%n</pattern>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%date] %highlight([%level]) [%logger{10} %file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
