@@ -1,10 +1,8 @@
 package com.zuoye.rabbitmq.hello_world;
 
-import com.rabbitmq.client.*;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import com.rabbitmq.client.CancelCallback;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.DeliverCallback;
 
 import static com.zuoye.rabbitmq.RabbitMQUtils.createChannel;
 

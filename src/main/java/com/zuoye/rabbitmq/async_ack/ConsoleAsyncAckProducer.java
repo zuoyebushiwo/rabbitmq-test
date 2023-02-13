@@ -1,10 +1,8 @@
 package com.zuoye.rabbitmq.async_ack;
 
 import com.google.common.collect.Maps;
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.ConfirmCallback;
-import com.rabbitmq.client.MessageProperties;
 import com.zuoye.rabbitmq.RabbitMQUtils;
 
 import java.util.Scanner;

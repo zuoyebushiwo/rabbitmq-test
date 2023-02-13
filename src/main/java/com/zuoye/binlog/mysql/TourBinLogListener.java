@@ -3,7 +3,6 @@ package com.zuoye.binlog.mysql;
 import cn.hutool.core.collection.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

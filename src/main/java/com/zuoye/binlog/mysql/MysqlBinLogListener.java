@@ -3,12 +3,9 @@ package com.zuoye.binlog.mysql;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 import com.github.shyiko.mysql.binlog.event.deserialization.EventDeserializer;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;

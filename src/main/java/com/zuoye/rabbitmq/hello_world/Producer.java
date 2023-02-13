@@ -2,13 +2,9 @@ package com.zuoye.rabbitmq.hello_world;
 
 import com.google.common.collect.Maps;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.zuoye.rabbitmq.RabbitMQUtils;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * RabbitMQ 第一个实例

@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.github.shyiko.mysql.binlog.event.EventType.isDelete;

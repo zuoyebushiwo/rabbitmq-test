@@ -1,25 +1,17 @@
 package com.zuoye.binlog.mysql;
 
-import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.shyiko.mysql.binlog.event.EventType;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.sql.*;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import static com.github.shyiko.mysql.binlog.event.EventType.isDelete;
-import static com.github.shyiko.mysql.binlog.event.EventType.isUpdate;
-import static com.github.shyiko.mysql.binlog.event.EventType.isWrite;
+import static com.github.shyiko.mysql.binlog.event.EventType.*;
 
 /**
  * 监听工具
