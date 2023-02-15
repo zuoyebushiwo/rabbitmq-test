@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * RabbitMQ 第一个实例
  *
- * @author ZhangXueJun
+ * @author ZuoYe
  * @Date 2022年10月16日
  */
 public class Producer {

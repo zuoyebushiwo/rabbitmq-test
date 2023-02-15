@@ -3,7 +3,7 @@ package com.zuoye.rabbitmq;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author ZhangXueJun
+ * @author ZuoYe
  * @Date 2022年10月18日
  */
 public class SleepUtils {

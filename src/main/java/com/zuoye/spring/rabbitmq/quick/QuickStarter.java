@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 /**
- * @author ZhangXueJun
+ * @author ZuoYe
  * @Date 2023年02月13日
  */
 public class QuickStarter {

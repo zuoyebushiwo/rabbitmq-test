@@ -7,7 +7,7 @@ import com.zuoye.rabbitmq.RabbitMQUtils;
 import java.util.Scanner;
 
 /**
- * @author ZhangXueJun
+ * @author ZuoYe
  * @Date 2022年10月18日
  */
 public class ConsoleProducer {

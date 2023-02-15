@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import static com.zuoye.rabbitmq.RabbitMQUtils.createChannel;
 
 /**
- * @author ZhangXueJun
+ * @author ZuoYe
  * @Date 2022年10月18日
  */
 public class EfficientAckWorker {

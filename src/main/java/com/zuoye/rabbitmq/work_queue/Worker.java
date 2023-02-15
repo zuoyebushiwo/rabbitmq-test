@@ -7,7 +7,7 @@ import com.rabbitmq.client.DeliverCallback;
 import static com.zuoye.rabbitmq.RabbitMQUtils.createChannel;
 
 /**
- * @author ZhangXueJun
+ * @author ZuoYe
  * @Date 2022年10月16日
  */
 public class Worker {

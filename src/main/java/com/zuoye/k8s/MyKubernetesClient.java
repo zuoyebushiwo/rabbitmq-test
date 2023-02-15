@@ -7,7 +7,7 @@ import io.fabric8.kubernetes.api.model.PodBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 
 /**
- * @author ZhangXueJun
+ * @author ZuoYe
  * @Date 2023年01月29日
  */
 public class MyKubernetesClient {
