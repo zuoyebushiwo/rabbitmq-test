@@ -1,9 +1,13 @@
 package com.zuoye.spring.rabbitmq;
 
 import com.zuoye.spring.rabbitmq.config.RabbitConfiguration;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.ReturnedMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,11 +17,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.BiConsumer;
 
 /**
  * @author ZuoYe
  * @Date 2023年02月13日
  */
+@Slf4j
 @SpringBootApplication
 public class SpringRabbitApplication {
     public static void main(String[] args) {
@@ -32,13 +38,17 @@ public class SpringRabbitApplication {
     }
 
     @Bean
-    public ApplicationRunner runner(AmqpTemplate template) {
+    public ApplicationRunner runner(RabbitTemplate template) {
         return new ApplicationRunner() {
             @Override
             public void run(ApplicationArguments args) throws Exception {
                 for (int i = 0; i < 10; i++) {
-                    template.convertAndSend("myqueue", "foo"+ i);
+                    CorrelationData cd1 = new CorrelationData();
+                    cd1.setId(i+" ");
+                    template.convertAndSend("", "myqueue",  "foo"+ i, cd1);
                     TimeUnit.SECONDS.sleep(5);
+
+                    log.info("CorrelationData:{} {} {}", cd1.getId());
                 }
             }
         };

@@ -65,7 +65,6 @@ public class RabbitConfiguration {
         };
 
 
-
         connectionFactory.getRabbitConnectionFactory().getClientProperties().put("aaaa", "1111111");
         connectionFactory.setChannelListeners(Lists.newArrayList(channelListener));
         connectionFactory.setConnectionListeners(Lists.newArrayList(connectionListener));
@@ -101,6 +100,7 @@ public class RabbitConfiguration {
         backOffPolicy.setMaxInterval(10000);
         retryTemplate.setBackOffPolicy(backOffPolicy);
         rabbitTemplate.setRetryTemplate(retryTemplate);
+        rabbitTemplate.setUsePublisherConnection(true);
         rabbitTemplate.setReturnsCallback(new RabbitTemplate.ReturnsCallback() {
             @Override
             public void returnedMessage(ReturnedMessage returned) {
