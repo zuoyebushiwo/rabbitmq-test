@@ -1,0 +1,19 @@
+package com.zuoye.spring.rabbitmq.listener;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.listener.AsyncConsumerRestartedEvent;
+import org.springframework.amqp.rabbit.listener.MissingQueueEvent;
+import org.springframework.context.ApplicationListener;
+
+/**
+ * @author ZhangXueJun
+ * @Date 2023年02月20日
+ */
+@Slf4j
+public class RabbitMissingQueueListener implements ApplicationListener<MissingQueueEvent> {
+
+    @Override
+    public void onApplicationEvent(MissingQueueEvent event) {
+      log.info("onApplicationEvent:" + event.toString());
+    }
+}
