@@ -30,7 +30,7 @@ public class TourBinLogListener  {
         log.info("初始化配置信息：" + binLogConstants.toString());
 
         // 初始化配置信息
-        Conf conf = new Conf(binLogConstants.getHost(), binLogConstants.getPort(), binLogConstants.getUsername(), binLogConstants.getPasswd());
+        MyConf conf = new MyConf(binLogConstants.getHost(), binLogConstants.getPort(), binLogConstants.getUsername(), binLogConstants.getPasswd());
 
         // 初始化监听器
         MysqlBinLogListener mysqlBinLogListener = new MysqlBinLogListener(conf);

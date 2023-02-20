@@ -2,6 +2,7 @@ package com.zuoye.binlog.mysql;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 数据库配置
@@ -11,7 +12,8 @@ import lombok.Data;
  **/
 @Data
 @AllArgsConstructor
-public class Conf {
+@NoArgsConstructor
+public class MyConf {
     private String host;
     private int port;
     private String username;

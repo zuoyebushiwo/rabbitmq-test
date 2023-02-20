@@ -20,14 +20,14 @@ public class QuickStarter {
         ConnectionFactory connectionFactory = new CachingConnectionFactory("127.0.0.1", 12345);
         AmqpAdmin admin = new RabbitAdmin(connectionFactory);
         admin.declareQueue(new Queue("myqueue"));
-        AmqpTemplate template = new RabbitTemplate(connectionFactory);
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.convertAndSend("myqueue", "foo");
         String foo = (String) template.receiveAndConvert("myqueue");
 
         System.out.println(foo);
 
         ApplicationContext context = new GenericXmlApplicationContext("classpath:/rabbit-context.xml");
-        template = context.getBean(AmqpTemplate.class);
+        template = context.getBean(RabbitTemplate.class);
         template.convertAndSend("myqueue", "foo");
 
         foo = (String) template.receiveAndConvert("myqueue");

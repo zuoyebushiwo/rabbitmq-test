@@ -4,11 +4,19 @@ import com.google.common.collect.Lists;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.ShutdownSignalException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.ReturnedMessage;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.*;
+import org.springframework.amqp.rabbit.core.CorrelationDataPostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
@@ -86,6 +94,15 @@ public class RabbitConfiguration {
     }
 
     @Bean
+    public RabbitListenerContainerFactory<?> rabbitListenerContainerFactory(ConnectionFactory connectionFactory){
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        return factory;
+    }
+
+
+    @Bean
     public RabbitAdmin amqpAdmin() {
         return new RabbitAdmin(connectionFactory());
     }
@@ -114,6 +131,23 @@ public class RabbitConfiguration {
                  log.info((correlationData == null ? "": correlationData.toString()) +ack+ (cause == null ? "" : cause));
             }
         });
+        rabbitTemplate.setBeforePublishPostProcessors(new MessagePostProcessor() {
+            @Override
+            public Message postProcessMessage(Message message) throws AmqpException {
+                log.info("setBeforePublishPostProcessors: " + message.toString());
+                return message;
+            }
+        });
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        rabbitTemplate.setCorrelationDataPostProcessor(new CorrelationDataPostProcessor() {
+            @Override
+            public CorrelationData postProcess(Message message, CorrelationData correlationData) {
+                log.info("setBeforePublishPostProcessors: " + message.toString() + " correlationData:" + correlationData);
+                return correlationData;
+            }
+        });
+
+        rabbitTemplate.setMandatory(true);
         return rabbitTemplate;
     }
 

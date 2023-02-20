@@ -33,7 +33,7 @@ public class BinLogUtils {
     /**
      * 获取columns集合
      */
-    public static Map<String, Colum> getColMap(Conf conf, String db, String table) throws ClassNotFoundException {
+    public static Map<String, Colum> getColMap(MyConf conf, String db, String table) throws ClassNotFoundException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             // 保存当前注册的表的colum信息

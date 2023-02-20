@@ -32,17 +32,17 @@ public class MysqlBinLogListener implements BinaryLogClient.EventListener {
     // 存放每张数据表对应的listener
     private Map<String, BinLogListener> listeners;
 
-    private Conf conf;
+    private MyConf conf;
     private Map<String, Map<String, Colum>> dbTableCols;
     private String dbTable;
 
     /**
      * 监听器初始化
      *
-     * @param conf
+     * @param myConf
      */
-    public MysqlBinLogListener(Conf conf) {
-        BinaryLogClient client = new BinaryLogClient(conf.getHost(), conf.getPort(), conf.getUsername(), conf.getPasswd());
+    public MysqlBinLogListener(MyConf myConf) {
+        BinaryLogClient client = new BinaryLogClient(myConf.getHost(), myConf.getPort(), myConf.getUsername(), myConf.getPasswd());
         EventDeserializer eventDeserializer = new EventDeserializer();
         //eventDeserializer.setCompatibilityMode(//序列化
         //        EventDeserializer.CompatibilityMode.DATE_AND_TIME_AS_LONG,
@@ -51,7 +51,7 @@ public class MysqlBinLogListener implements BinaryLogClient.EventListener {
         client.setEventDeserializer(eventDeserializer);
         this.parseClient = client;
         this.queue = new ArrayBlockingQueue<>(1024);
-        this.conf = conf;
+        this.conf = myConf;
         this.listeners = Maps.newHashMap();
         this.dbTableCols = new ConcurrentHashMap<>();
         this.consumer = Executors.newFixedThreadPool(consumerThreads);
